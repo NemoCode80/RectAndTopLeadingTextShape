@@ -17,4 +17,5 @@ line width, corner radius, aligning title with titleFont for rectangle.
 - spacing: The leading sapcing of title on the shape.
 
 # ContentView
-<img width="392" alt="截圖 2024-09-27 下午4 47 26" src="https://github.com/user-attachments/assets/7136017c-fa69-478d-8194-bb6242907c9e">
+<img width="322" alt="截圖 2024-09-28 凌晨12 39 41" src="https://github.com/user-attachments/assets/b3531639-e8cb-4d82-b4a9-530c3ae6fb8d">
+

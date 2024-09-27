@@ -6,7 +6,7 @@
 Creates a shape with view as the given rounded rectangle, which can setting customized
 line width, corner radius, aligning title with titleFont for rectangle.
      
-Important: `Do not implement it on background with image.`
+> Important: `Do not implement it on background with image.`
 
 #### *Parameters:*
 - lineWidth: The specified lineWidth for rect.

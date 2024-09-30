@@ -6,8 +6,10 @@
 
 import SwiftUI
 
-/// The Shape help to quickly create a customized shape(View)
-/// that can use it in ZStack with another view to show the customized view.
+/// A custom `Shape` that allows for rapid creation of customized views.
+///
+/// This shape can be used within a `ZStack`, enabling you to overlay it 
+/// with other views to create a customized appearance.
 struct RectAndTopLeadingTextShape<S: ShapeStyle>: Shape {
     var lineWidth: CGFloat
     var cornerRadius: CGFloat
@@ -16,18 +18,17 @@ struct RectAndTopLeadingTextShape<S: ShapeStyle>: Shape {
     var titleBackground: S
     var spacing: CGFloat
     
-    /// Creates a shape with view as the given rounded rectangle, which can setting customized
-    /// line width, corner radius, aligning title with titleFont for rectangle.
-    /// 
-    /// ``Do not implement it on background with image.``
-    /// 
+    /// Creates a customized rounded rectangle shape with configurable line width, corner radius, and title alignment.
+    ///
+    /// - Important: Do not apply this method to backgrounds containing images.
+    ///
     /// - Parameters:
-    ///   - lineWidth: The specified lineWidth for rect.
-    ///   - cornerRadius: The cornerRadius for rect.
-    ///   - title: The description for title with string.
-    ///   - titleFont: The Font enum that demands the font for setting font size and aligning spacing with rect.
-    ///   - titleBackground: The shapeStyle of title.
-    ///   - spacing: The leading sapcing of title on the shape.
+    ///   - lineWidth: The width of the rectangle's border.
+    ///   - cornerRadius: The radius for rounding the rectangle's corners.
+    ///   - title: A string representing the title to be displayed within the rectangle.
+    ///   - titleFont: A `Font` enum that specifies the font type and size for the title, ensuring proper alignment within the rectangle.
+    ///   - titleBackground: The background style for the title, defined as a `ShapeStyle`.
+    ///   - spacing: The leading spacing between the title and the rectangle's border.
     init(lineWidth: CGFloat = 3, cornerRadius: CGFloat = 20, title: String = "標題名稱", titleFont: Font = .headline, titleBackground: S = .background, spacing: CGFloat = 30) {
         self.lineWidth = lineWidth
         self.cornerRadius = cornerRadius
@@ -49,7 +50,7 @@ struct RectAndTopLeadingTextShape<S: ShapeStyle>: Shape {
         case .body, .headline, .subheadline, .callout: -10
         case .footnote: -8
         case .caption, .caption2: -6
-        default: 0
+        default: fatalError("The titleFont has not been setting yet❗️")
         }
     }
     
@@ -76,28 +77,12 @@ struct RectAndTopLeadingTextShape<S: ShapeStyle>: Shape {
             .foregroundStyle(.primary)
             .padding(.horizontal, 8) // a spacing with roundedRect
             .background(self.titleBackground, in: RoundedRectangle(cornerRadius: 0))
-//            .background {
-//                GeometryReader { proxy in
-//                    Color.clear
-//                        .overlay(self.titleBackground, in: RoundedRectangle(cornerRadius: 0))
-//                        .preference(key: TitleBackgroundPreferenceKey.self, value: proxy.size.height)
-//                }
-//            }
-            
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             .padding(.leading, spacing)
             .padding(.top, titleTopSpacing)
             .background {
                 self.stroke(lineWidth: lineWidth)
             }
-    }
-}
-
-fileprivate struct TitleBackgroundPreferenceKey: PreferenceKey {
-    static var defaultValue: CGFloat = 50
-    
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
     }
 }
 

@@ -18,7 +18,7 @@ struct ContentView: View {
             RectAndTopLeadingTextShape(lineWidth: 3,
                                        cornerRadius: 20,
                                        title: title,
-                                       titleFont:.headline,
+                                       titleFont: .headline,
                                        titleBackground: .background,
                                        spacing: 30)
             
